@@ -13,6 +13,12 @@ set(SLEEF_BUILD_DFT OFF CACHE BOOL "Don't build sleef DFT lib" FORCE)
 set(SLEEF_BUILD_GNUABI_LIBS OFF CACHE BOOL "Don't build sleef gnuabi libs" FORCE)
 set(SLEEF_BUILD_TESTS OFF CACHE BOOL "Don't build sleef tests" FORCE)
 
+# Setup optional sleef static switch. And it only impact on Sleef submodule.
+# 1. BUILD_SHARED_LIBS is sharing in all cmake project and submodules, we can conpatiable to it.
+# 2. Detect SLEEF_BUILD_STATIC_LIBS and check SLEEF_BUILD_STATIC_LIBS after BUILD_SHARED_LIBS, It
+#    is a optional switch to config sleef as a cmake project's submodule.
+# set(SLEEF_BUILD_STATIC_LIBS=1)
+
 add_subdirectory(${THIRD_PARTY_ROOT_DIR}/sleef)
 
 set(SOURCES_FILES ${PROJECT_ROOT_DIR}/csrc/sleef_cmake_example.cpp)
