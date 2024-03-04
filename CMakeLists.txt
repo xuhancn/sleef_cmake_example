@@ -8,16 +8,24 @@ set(THIRD_PARTY_ROOT_DIR ${PROJECT_ROOT_DIR}/third_party)
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
+message("Set global BUILD_SHARED_LIBS in parent project")
 set(BUILD_SHARED_LIBS ON)
+message("BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}")
+
+function(add_sleef)
 
 # setup sleef options:
-set(SLEEF_BUILD_SHARED_LIBS OFF CACHE BOOL "Build sleef as static library" FORCE)
+set(BUILD_SHARED_LIBS OFF CACHE BOOL "Build sleef as static library" FORCE)
 set(SLEEF_BUILD_DFT OFF CACHE BOOL "Don't build sleef DFT lib" FORCE)
 set(SLEEF_BUILD_GNUABI_LIBS OFF CACHE BOOL "Don't build sleef gnuabi libs" FORCE)
 set(SLEEF_BUILD_TESTS OFF CACHE BOOL "Don't build sleef tests" FORCE)
 set(SLEEF_BUILD_SCALAR_LIB OFF CACHE BOOL "libsleefscalar will be built." FORCE)
 
 add_subdirectory(${THIRD_PARTY_ROOT_DIR}/sleef)
+
+endfunction()
+add_sleef()
+message("BUILD_SHARED_LIBS=${BUILD_SHARED_LIBS}")
 
 set(SOURCES_FILES ${PROJECT_ROOT_DIR}/csrc/sleef_cmake_example.cpp)
 add_executable(${PROJ_NAME} ${SOURCES_FILES})
